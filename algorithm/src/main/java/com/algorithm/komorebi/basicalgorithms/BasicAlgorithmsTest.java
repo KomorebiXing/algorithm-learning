@@ -151,6 +151,37 @@ public class BasicAlgorithmsTest {
         log.info("one为：{},two为：{}", one, ero);
     }
 
+
+    /**
+     * 第二道题的plus版本
+     * <p>与运算：相同1为1,其余全部0</p>
+     */
+    @Test
+    public void bitTwoPlus() {
+        int[] ints = {1, 2, 2, 4, 4, 6, 6, 1, 1, 3};
+        int ero = 0;
+
+        for (int j : ints) {
+            ero ^= j;
+        }
+
+        // eor = a ^ b
+        // eor ！= 0
+        // eor 必然有一个位置是 1
+        // 取反 有了符号位 用与运算
+        int one = ero & (~ero + 1); // 提取出最右侧的1
+
+        int onlyOne = 0;
+        for (int anInt : ints) {
+            if ((anInt & one) == 0){
+                onlyOne ^= anInt;
+            }
+        }
+        ero = ero ^ onlyOne;
+
+        log.info("one为：{},two为：{}", onlyOne, ero);
+    }
+
     /**
      * <p>冒泡排序</p>
      * <p>冒泡排序：规则你可以理解为,外层循环就是控制次数,内层循环就是找外层次数n的最大值(做比较),找到最大值之后就,外层循环就n-1,依次类推</p>
